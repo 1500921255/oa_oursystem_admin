@@ -1,6 +1,6 @@
 # DataSource Config
 mybatis-plus:
-  mapper-locations: classpath*:/mapper/**Mapper.xml
+  mapper-locations: classpath*:/mapper/*Mapper.xml
 
 spring:
   datasource:

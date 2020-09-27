@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,9 +27,13 @@ public class EmployeeUserController {
     private EmployeeUserService employeeUserService;
 
     @GetMapping("login")
-
-    public Result login(){
-     EmployeeUser employeeUser =   employeeUserService.LOGIN();
-      return Result.succ(200,"操作成功",employeeUser);
+    public Result login(@RequestParam("employee_user") String employee_user , @RequestParam("employee_pwd") String employee_pwd){
+     EmployeeUser employeeUser =   employeeUserService.LOGIN(employee_user,employee_pwd);
+     if(employeeUser == null){
+         return Result.succ(401,"登陆失败,账号或密码错误",null);
+     }else{
+         employeeUser.setEmployeePwd("你看不见");
+         return Result.succ(200,"登录成功",employeeUser);
+     }
     }
 }

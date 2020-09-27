@@ -21,11 +21,19 @@ public class EmployeeUserServiceImpl extends ServiceImpl<EmployeeUserMapper, Emp
 
     @Autowired
     private EmployeeUserMapper userMapper;
+
     @Override
-    public EmployeeUser LOGIN() {
+    public EmployeeUser LOGIN(String employee_user,String employee_pwd) {
 
-      EmployeeUser employeeUser = userMapper.selectOne(new QueryWrapper<EmployeeUser>().eq("employee_user","0000"));
-
-        return employeeUser;
+      EmployeeUser employeeUser = userMapper.selectOne(new QueryWrapper<EmployeeUser>().eq("employee_user",employee_user));
+      if(employeeUser == null){
+          return null;
+      }else {
+          if(employee_pwd.equals(employeeUser.getEmployeePwd())){
+              return employeeUser;
+          }else {
+              return null;
+          }
+      }
     }
 }

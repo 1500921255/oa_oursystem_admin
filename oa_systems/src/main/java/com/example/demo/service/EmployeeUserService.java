@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
  * @author lxh
  * @since 2020-09-26
  */
-@Repository
 public interface EmployeeUserService extends IService<EmployeeUser> {
-    EmployeeUser LOGIN();
+    EmployeeUser LOGIN(String employee_user,String employee_pwd);
 }

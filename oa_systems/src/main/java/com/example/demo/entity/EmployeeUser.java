@@ -61,7 +61,7 @@ public class EmployeeUser implements Serializable {
     /**
      * 职员所属部门
      */
-    private String employeeDepart;
+    private String employeeDepartId;
 
     /**
      * 职员状态
