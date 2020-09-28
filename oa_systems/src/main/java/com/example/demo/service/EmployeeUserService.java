@@ -4,6 +4,8 @@ import com.example.demo.entity.EmployeeUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -14,4 +16,5 @@ import org.springframework.stereotype.Repository;
  */
 public interface EmployeeUserService extends IService<EmployeeUser> {
     EmployeeUser LOGIN(String employee_user,String employee_pwd);
+    List SelectAll();
 }

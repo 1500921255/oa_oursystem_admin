@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * <p>
  *  前端控制器
@@ -35,5 +37,11 @@ public class EmployeeUserController {
          employeeUser.setEmployeePwd("你看不见");
          return Result.succ(200,"登录成功",employeeUser);
      }
+    }
+
+    @GetMapping("Page")
+    public Result SelectAll(){
+        List<EmployeeUser> list = employeeUserService.SelectAll();
+        return Result.succ(list);
     }
 }
