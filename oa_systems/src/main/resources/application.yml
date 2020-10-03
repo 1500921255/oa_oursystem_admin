@@ -6,5 +6,5 @@ spring:
   datasource:
     username: root
     password: root
-    url: "jdbc:mysql://localhost:3307/oa_system?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC"
+    url: "jdbc:mysql://localhost:3306/oa_system?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC"
     driver-class-name: com.mysql.cj.jdbc.Driver
