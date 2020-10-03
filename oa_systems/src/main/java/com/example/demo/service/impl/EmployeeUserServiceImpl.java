@@ -10,7 +10,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -42,10 +45,31 @@ public class EmployeeUserServiceImpl extends ServiceImpl<EmployeeUserMapper, Emp
     }
 
     @Override
-    public List SelectAll() {
-        IPage<EmployeeUser> page = new Page<>(1,10);
+    public Map Pagelist(int current,int size) {
+        IPage<EmployeeUser> page = new Page<>(current,size);
         page =  userMapper.selectPage(page,null);
-        System.out.println(page.getRecords());
-        return page.getRecords();
+        Map map = new HashMap() ;
+        map.put("pages",page.getPages());
+        map.put("total",page.getTotal());
+        map.put("data",page.getRecords());
+        return map;
+    }
+
+    @Override
+    public int DeleteUser(int employeeId) {
+       int i =  userMapper.deleteById(employeeId);
+        return i;
+    }
+
+    @Override
+    public int UpdateUser(EmployeeUser employeeUser) {
+        int i = userMapper.updateById(employeeUser);
+        return i;
+    }
+
+    @Override
+    public int InsertUser(EmployeeUser employeeUser) {
+        int i = userMapper.insert(employeeUser);
+        return i;
     }
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -16,5 +17,8 @@ import java.util.List;
  */
 public interface EmployeeUserService extends IService<EmployeeUser> {
     EmployeeUser LOGIN(String employee_user,String employee_pwd);
-    List SelectAll();
+    Map Pagelist(int current, int size);
+    int DeleteUser(int employeeId);
+    int UpdateUser(EmployeeUser employeeUser);
+    int InsertUser(EmployeeUser employeeUser);
 }
