@@ -7,6 +7,7 @@ import com.example.demo.entity.EmployeeUser;
 import com.example.demo.mapper.EmployeeUserMapper;
 import com.example.demo.service.EmployeeUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,18 +31,14 @@ public class EmployeeUserServiceImpl extends ServiceImpl<EmployeeUserMapper, Emp
     private EmployeeUserMapper userMapper;
 
     @Override
-    public EmployeeUser LOGIN(String employee_user,String employee_pwd) {
+    public EmployeeUser LOGIN(String employee_user) {
 
-      EmployeeUser employeeUser = userMapper.selectOne(new QueryWrapper<EmployeeUser>().eq("employee_user",employee_user));
-      if(employeeUser == null){
-          return null;
-      }else {
-          if(employee_pwd.equals(employeeUser.getEmployeePwd())){
-              return employeeUser;
-          }else {
-              return null;
-          }
-      }
+        EmployeeUser employeeUser = userMapper.selectOne(new QueryWrapper<EmployeeUser>().eq("employee_user",employee_user));
+        if(employeeUser == null){
+            return null;
+        }else {
+            return employeeUser;
+        }
     }
 
     @Override
@@ -69,6 +66,7 @@ public class EmployeeUserServiceImpl extends ServiceImpl<EmployeeUserMapper, Emp
 
     @Override
     public int InsertUser(EmployeeUser employeeUser) {
+        employeeUser.setEmployeePwd(new Md5Hash(employeeUser.getEmployeePwd(),employeeUser.getEmployeeUser(),3).toString());
         int i = userMapper.insert(employeeUser);
         return i;
     }

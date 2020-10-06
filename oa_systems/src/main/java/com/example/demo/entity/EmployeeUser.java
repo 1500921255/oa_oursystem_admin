@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.crazycake.shiro.AuthCachePrincipal;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Component
-public class EmployeeUser implements Serializable {
+public class EmployeeUser implements Serializable, AuthCachePrincipal {
 
     private static final long serialVersionUID = 1L;
 
@@ -66,7 +67,11 @@ public class EmployeeUser implements Serializable {
     /**
      * 职员状态
      */
-    private String employeeStatus;
+    private int employeeStatus;
 
 
+    @Override
+    public String getAuthCacheKey() {
+        return null;
+    }
 }

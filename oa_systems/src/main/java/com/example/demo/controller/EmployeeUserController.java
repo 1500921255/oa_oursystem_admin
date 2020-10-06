@@ -1,14 +1,22 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.Shiro.Untils.JwtUtils;
 import com.example.demo.common.Result;
 import com.example.demo.entity.EmployeeUser;
 import com.example.demo.service.EmployeeUserService;
-import com.example.demo.service.impl.EmployeeUserServiceImpl;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -25,15 +33,25 @@ public class EmployeeUserController {
     @Autowired
     private EmployeeUserService employeeUserService;
 
-        @GetMapping("login")
-    public Result login(@RequestParam("employee_user") String employee_user , @RequestParam("employee_pwd") String employee_pwd){
-     EmployeeUser employeeUser =   employeeUserService.LOGIN(employee_user,employee_pwd);
-     if(employeeUser == null){
-         return Result.fail(401,"登陆失败,账号或密码错误",null);
-     }else{
-         employeeUser.setEmployeePwd("你看不见");
-         return Result.succ(200,"登录成功",employeeUser);
-     }
+    @GetMapping("login")
+    public Result login(@RequestParam("employee_user") String employee_user , @RequestParam("employee_pwd") String employee_pwd, HttpServletResponse response){
+       Subject subject = SecurityUtils.getSubject();
+        employee_pwd =  new Md5Hash(employee_user,employee_pwd,3).toString();
+       UsernamePasswordToken token = new UsernamePasswordToken(employee_user,employee_pwd);
+       try{
+        subject.login(token);
+        String SessionId = (String) subject.getSession().getId();
+        return Result.succ(SessionId);
+       }catch (IncorrectCredentialsException e){
+        return Result.fail("密码错误");
+       }catch (LockedAccountException e){
+        return Result.fail("账户已被冻结");
+       }catch (AuthenticationException e){
+        return Result.fail("该用户不存在");
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+       return Result.fail("登陆失败");
     }
 
     @GetMapping(value = "/Page/{current}")
@@ -46,30 +64,29 @@ public class EmployeeUserController {
     public Result DeleteUser(@PathVariable("employeeId") int employeeId){
         int i = employeeUserService.DeleteUser(employeeId);
         if(i == 1){
-            return Result.succ(200,"删除成功",null);
+            return Result.succ(200,"删除成功",true,null);
         }else {
-            return Result.fail(401,"删除失败",null);
+            return Result.fail(401,"删除失败",false,null);
         }
     }
 
     @PostMapping(value = "InsertUser")
-    public Result InsertUser(@RequestParam("employeeUser")EmployeeUser employeeUser){
+    public Result InsertUser(@RequestBody EmployeeUser employeeUser){
         int i = employeeUserService.InsertUser(employeeUser);
         if(i == 1){
-            return Result.succ(200,"添加成功",null);
+            return Result.succ(200,"添加成功",true,null);
         }else {
-            return Result.fail(401,"添加失败",null);
+            return Result.fail(401,"添加失败",false,null);
         }
     }
 
     @PutMapping(value = "UpdateUser")
     public Result UpdateUser(@RequestBody EmployeeUser employeeUser){
-        System.out.println(employeeUser);
         int i = employeeUserService.UpdateUser(employeeUser);
         if(i == 1){
-            return Result.succ(200,"添加成功",null);
+            return Result.succ(200,"添加成功",true,null);
         }else {
-            return Result.fail(401,"添加失败",null);
+            return Result.fail(401,"添加失败",false,null);
         }
     }
 }
