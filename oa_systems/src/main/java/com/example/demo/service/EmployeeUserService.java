@@ -16,7 +16,7 @@ import java.util.Map;
  * @since 2020-09-26
  */
 public interface EmployeeUserService extends IService<EmployeeUser> {
-    EmployeeUser LOGIN(String employee_user,String employee_pwd);
+    EmployeeUser LOGIN(String employee_user);
     Map Pagelist(int current, int size);
     int DeleteUser(int employeeId);
     int UpdateUser(EmployeeUser employeeUser);
