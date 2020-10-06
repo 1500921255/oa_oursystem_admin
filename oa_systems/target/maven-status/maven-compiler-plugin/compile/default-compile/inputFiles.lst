@@ -1,2 +1,15 @@
-D:\oa_admin\oa_systems\src\main\java\com\example\demo\DemoApplication.java
-D:\oa_admin\oa_systems\src\main\java\com\example\demo\CodeGenerator.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\DemoApplication.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\mapper\DepartDictMapper.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\service\DepartDictService.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\entity\EmployeeUser.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\service\EmployeeUserService.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\service\impl\DepartDictServiceImpl.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\common\CorsConfig.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\common\Result.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\mapper\EmployeeUserMapper.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\controller\DepartDictController.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\service\impl\EmployeeUserServiceImpl.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\entity\DepartDict.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\CodeGenerator.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\controller\EmployeeUserController.java
+D:\oa_system_admin\oa_oursystem_admin\oa_systems\src\main\java\com\example\demo\common\MyBatisConfig.java

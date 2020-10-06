@@ -5,10 +5,9 @@ import com.example.demo.common.Result;
 import com.example.demo.entity.DepartDict;
 import com.example.demo.service.DepartDictService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 import java.util.Map;
 
