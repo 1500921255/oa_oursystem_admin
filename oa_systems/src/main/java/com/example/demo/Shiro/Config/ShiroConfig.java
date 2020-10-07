@@ -42,7 +42,7 @@ public class ShiroConfig {
         //匿名访问
         filterMap.put("/employee-user/login","anon");
         //认证之后才可访问
-        filterMap.put("/**","authc");
+      //  filterMap.put("/**","authc");
         //未登录或无权限时跳转
         shiroFilterFactoryBean.setLoginUrl("/bus/error");
         shiroFilterFactoryBean.setUnauthorizedUrl("/bus/error");

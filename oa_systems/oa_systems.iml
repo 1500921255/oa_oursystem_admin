@@ -25,6 +25,22 @@
     </content>
     <orderEntry type="jdk" jdkName="14" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:2.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:2.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-keyvalue:2.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-oxm:5.2.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.2.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.lettuce:lettuce-core:5.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.52.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.52.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.52.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.52.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.52.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.52.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.3.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.47" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.2.9.RELEASE" level="project" />
@@ -113,9 +129,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.2.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:5.2.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.2.9.RELEASE" level="project" />
-<<<<<<< HEAD
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.47" level="project" />
-=======
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-spring:1.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-core:1.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-lang:1.4.1" level="project" />
@@ -150,6 +164,5 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: commons-codec:commons-codec:1.14" level="project" />
->>>>>>> 61cbdf52b1c99134ceb641faf4fbc0080eb87353
   </component>
 </module>
