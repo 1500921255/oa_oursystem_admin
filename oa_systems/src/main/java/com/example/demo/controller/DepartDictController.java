@@ -36,6 +36,7 @@ public class DepartDictController {
     }
     @GetMapping("departPage")
     public Result selectPage(@RequestParam("currentPage") int currentPage,@RequestParam("pagesize") int pagesize) {
+       System.out.println("213123");
         Map map = departDictService.SelectPage(currentPage,pagesize);
         if (map == null) {
             return Result.succ(401, "暂无数据",false, null);

@@ -21,11 +21,7 @@ public class CheckInController {
     @PostMapping("checkin/{employee_user}")
     public Result checkIn(@PathVariable(name = "employee_user") String employee_user) {
         checkInService.checkIn(employee_user);
-<<<<<<< HEAD
         return Result.succ(200, "签到成功",true ,null);
-=======
-        return Result.succ(200, "签到成功",true, null);
->>>>>>> ce070302062e5b814d5e2a0e76f9746ac25f49c9
     }
     @GetMapping("checkinday")
     public Result ChenkDay(@RequestParam String firstday,@RequestParam String today,String employee_user) {
