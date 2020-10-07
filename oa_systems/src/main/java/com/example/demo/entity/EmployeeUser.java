@@ -1,10 +1,15 @@
 package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.ibatis.annotations.Select;
 import org.crazycake.shiro.AuthCachePrincipal;
 import org.springframework.stereotype.Component;
 
@@ -69,9 +74,16 @@ public class EmployeeUser implements Serializable, AuthCachePrincipal {
      */
     private int employeeStatus;
 
+    /**
+     *职员的角色
+     */
+    @TableField(exist = false)
+    private Set<Role> employeeRole = new HashSet<>();
 
     @Override
     public String getAuthCacheKey() {
         return null;
     }
+
+
 }

@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,6 +24,7 @@ public class Role implements Serializable {
     /**
      * 角色id
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
