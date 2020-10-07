@@ -3,24 +3,20 @@ package com.example.demo.Shiro.Config;
 
 import com.example.demo.Shiro.Realms.EmployeeRealm;
 import com.example.demo.Shiro.Session.SessionManager;
-import com.example.demo.Shiro.Untils.JwtFilter;
-import org.apache.shiro.spring.LifecycleBeanPostProcessor;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
+import com.example.demo.Shiro.SimpleCORSFilter;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
-import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,15 +30,16 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("SecurityManager") DefaultWebSecurityManager SecurityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(SecurityManager);
-        //自定义过滤器
-//        Map<String, Filter> myfilterMap = new LinkedHashMap<>();
-//        myfilterMap.put("jwt", new JwtFilter());
+//        自定义过滤器
+        Map<String, Filter> myfilterMap = new LinkedHashMap<>();
+        myfilterMap.put("SimpleCORSFilter", new SimpleCORSFilter());
+        shiroFilterFactoryBean.setFilters(myfilterMap);
         //拦截页面配置
-        Map<String,String> filterMap = new LinkedHashMap<>();
-        //匿名访问
-      //  filterMap.put("/employee-user/login","anon");
+        Map<String, String> filterMap = shiroFilterFactoryBean.getFilterChainDefinitionMap();
+        filterMap.put("/employee-user/login","anon");
         //认证之后才可访问
-      //  filterMap.put("/**","");
+        filterMap.put("/**", "authc");
+
         //未登录或无权限时跳转
         shiroFilterFactoryBean.setLoginUrl("http://localhost:8081/#/error");
         shiroFilterFactoryBean.setUnauthorizedUrl("http://localhost:8081/#/error");

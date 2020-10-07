@@ -30,6 +30,7 @@ public class EmployeeRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         EmployeeUser employeeUser = (EmployeeUser) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        System.out.println("21321");
         return info;
     }
 
@@ -54,7 +55,6 @@ public class EmployeeRealm extends AuthorizingRealm {
         if(employeeUser.getEmployeeStatus() == 0){
             throw new LockedAccountException();   //用户处于禁用状态
         }
-
         return new SimpleAuthenticationInfo(employeeUser,employeeUser.getEmployeePwd(),this.getName());
     }
 }
