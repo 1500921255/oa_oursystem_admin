@@ -40,12 +40,12 @@ public class ShiroConfig {
         //拦截页面配置
         Map<String,String> filterMap = new LinkedHashMap<>();
         //匿名访问
-        filterMap.put("/employee-user/login","anon");
+      //  filterMap.put("/employee-user/login","anon");
         //认证之后才可访问
-      //  filterMap.put("/**","authc");
+      //  filterMap.put("/**","");
         //未登录或无权限时跳转
-        shiroFilterFactoryBean.setLoginUrl("/bus/error");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/bus/error");
+        shiroFilterFactoryBean.setLoginUrl("http://localhost:8081/#/error");
+        shiroFilterFactoryBean.setUnauthorizedUrl("http://localhost:8081/#/error");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
         return shiroFilterFactoryBean;

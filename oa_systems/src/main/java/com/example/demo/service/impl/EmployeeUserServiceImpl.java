@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.entity.EmployeeUser;
+import com.example.demo.entity.Role;
 import com.example.demo.mapper.EmployeeUserMapper;
 import com.example.demo.service.EmployeeUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -11,10 +12,7 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -70,4 +68,15 @@ public class EmployeeUserServiceImpl extends ServiceImpl<EmployeeUserMapper, Emp
         int i = userMapper.insert(employeeUser);
         return i;
     }
+
+    @Override
+    public Set<Role> employeeRole(int employeeID) {
+        Set<Role> set = userMapper.employeeRole(employeeID);
+        return set;
+    }
+
+//    public Set<Role> getUserRoles(int id){
+//        Set<Role> set = userMapper.employeeRole(id);
+//        return set;
+//    }
 }

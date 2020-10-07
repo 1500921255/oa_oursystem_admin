@@ -4,12 +4,14 @@ package com.example.demo.controller;
 import com.example.demo.Shiro.Untils.JwtUtils;
 import com.example.demo.common.Result;
 import com.example.demo.entity.EmployeeUser;
+import com.example.demo.entity.Role;
 import com.example.demo.service.EmployeeUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -33,6 +36,7 @@ public class EmployeeUserController {
     @Autowired
     private EmployeeUserService employeeUserService;
 
+    @RequiresRoles("超级管理员")
     @GetMapping("login")
     public Result login(@RequestParam("employee_user") String employee_user , @RequestParam("employee_pwd") String employee_pwd, HttpServletResponse response){
        Subject subject = SecurityUtils.getSubject();
@@ -88,5 +92,11 @@ public class EmployeeUserController {
         }else {
             return Result.fail(401,"添加失败",false,null);
         }
+    }
+
+    @GetMapping(value = "UserRoles/{id}")
+    public Result UserRoles(@PathVariable("id")int id){
+        Set<Role> set = employeeUserService.employeeRole(id);
+        return Result.succ(set);
     }
 }
