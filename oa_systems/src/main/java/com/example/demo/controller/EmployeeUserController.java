@@ -45,6 +45,7 @@ public class EmployeeUserController {
        try{
         subject.login(token);
         String SessionId = (String) subject.getSession().getId();
+           System.out.println( subject.hasRole("超级管理员"));
         return Result.succ(SessionId);
        }catch (IncorrectCredentialsException e){
         return Result.fail("密码错误");
@@ -58,6 +59,7 @@ public class EmployeeUserController {
        return Result.fail("登陆失败");
     }
 
+    @RequiresRoles("超级管理员")
     @GetMapping(value = "/Page/{current}")
     public Result SelectAll(@PathVariable("current") int current){
         System.out.println("213123");
