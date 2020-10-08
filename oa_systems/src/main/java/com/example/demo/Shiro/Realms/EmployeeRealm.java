@@ -43,6 +43,7 @@ public class EmployeeRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        System.out.println("21312321");
         String username = token.getUsername();
         String password = new String(token.getPassword());
         if (StringUtils.isEmpty(username)) {

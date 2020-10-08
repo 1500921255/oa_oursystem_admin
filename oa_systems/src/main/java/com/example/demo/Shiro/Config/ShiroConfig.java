@@ -38,11 +38,11 @@ public class ShiroConfig {
         Map<String, String> filterMap = shiroFilterFactoryBean.getFilterChainDefinitionMap();
         filterMap.put("/employee-user/login","anon");
         //认证之后才可访问
-        filterMap.put("/**", "authc");
+        filterMap.put("/depart-dict/departPage", "authc");
 
         //未登录或无权限时跳转
-        shiroFilterFactoryBean.setLoginUrl("http://localhost:8081/#/error");
-        shiroFilterFactoryBean.setUnauthorizedUrl("http://localhost:8081/#/error");
+        shiroFilterFactoryBean.setLoginUrl("/bus/error");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/bus/error");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
         return shiroFilterFactoryBean;
