@@ -41,8 +41,8 @@ public class ShiroConfig {
         filterMap.put("/**", "authc");
 
         //未登录或无权限时跳转
-        shiroFilterFactoryBean.setLoginUrl("http://localhost:8081/#/error");
-        shiroFilterFactoryBean.setUnauthorizedUrl("http://localhost:8081/#/error");
+        shiroFilterFactoryBean.setLoginUrl("/bus/error");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/bus/error");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
         return shiroFilterFactoryBean;

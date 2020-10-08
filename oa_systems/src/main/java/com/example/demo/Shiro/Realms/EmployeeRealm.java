@@ -1,6 +1,7 @@
 package com.example.demo.Shiro.Realms;
 
 import com.example.demo.entity.EmployeeUser;
+import com.example.demo.entity.Role;
 import com.example.demo.service.EmployeeUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -10,6 +11,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class EmployeeRealm extends AuthorizingRealm {
@@ -28,9 +32,16 @@ public class EmployeeRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        //得到认证之后返回的安全数据
         EmployeeUser employeeUser = (EmployeeUser) principalCollection.getPrimaryPrincipal();
+        Set<Role> roles = employeeUserService.employeeRole(employeeUser.getEmployeeId());
+        Set<String> userroles = new HashSet<>();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        System.out.println("21321");
+        for (Role role : roles){
+            userroles.add(role.getRoleName());
+        }
+        info.setRoles(userroles);
+        System.out.println("授权完成");
         return info;
     }
 
