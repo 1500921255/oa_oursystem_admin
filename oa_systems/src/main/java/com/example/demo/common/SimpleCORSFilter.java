@@ -1,10 +1,7 @@
-package com.example.demo.Shiro;
+package com.example.demo.common;
 
 
-import org.apache.shiro.web.filter.AccessControlFilter;
-import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.apache.shiro.web.servlet.AdviceFilter;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;

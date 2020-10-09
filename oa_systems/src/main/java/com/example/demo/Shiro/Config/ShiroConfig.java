@@ -3,7 +3,9 @@ package com.example.demo.Shiro.Config;
 
 import com.example.demo.Shiro.Realms.EmployeeRealm;
 import com.example.demo.Shiro.Session.SessionManager;
-import com.example.demo.Shiro.SimpleCORSFilter;
+//import com.example.demo.Shiro.SimpleCORSFilter;
+import com.example.demo.common.SimpleCORSFilter;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -39,10 +41,11 @@ public class ShiroConfig {
         filterMap.put("/employee-user/login","anon");
         //认证之后才可访问
         filterMap.put("/**", "authc");
+//        filterMap.put("/employee-user/page", "authc");
 
         //未登录或无权限时跳转
-        shiroFilterFactoryBean.setLoginUrl("/bus/error");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/bus/error");
+        shiroFilterFactoryBean.setLoginUrl("/bus/login/error");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/auth/error");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 
         return shiroFilterFactoryBean;
@@ -92,5 +95,20 @@ public class ShiroConfig {
         redisCacheManager.setRedisManager(redisManager());
         return redisCacheManager;
     }
+
+
+    /**
+     * 配置注解
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("SecurityManager")DefaultWebSecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor
+                = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
+
 
 }
