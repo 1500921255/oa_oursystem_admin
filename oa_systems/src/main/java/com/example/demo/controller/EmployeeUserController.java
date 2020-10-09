@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.Shiro.Untils.JwtUtils;
 import com.example.demo.common.Result;
 import com.example.demo.entity.EmployeeUser;
 import com.example.demo.entity.Role;
@@ -36,7 +35,6 @@ public class EmployeeUserController {
     @Autowired
     private EmployeeUserService employeeUserService;
 
-    @RequiresRoles("超级管理员")
     @GetMapping("login")
     public Result login(@RequestParam("employee_user") String employee_user , @RequestParam("employee_pwd") String employee_pwd, HttpServletResponse response){
         Subject subject = SecurityUtils.getSubject();
@@ -66,7 +64,7 @@ public class EmployeeUserController {
         Map map = employeeUserService.Pagelist(current,5);
         return Result.succ(map);
     }
-
+    @RequiresRoles("超级管理员")
     @DeleteMapping(value = "/DeleteUser/{employeeId}")
     public Result DeleteUser(@PathVariable("employeeId") int employeeId){
         int i = employeeUserService.DeleteUser(employeeId);
@@ -76,7 +74,7 @@ public class EmployeeUserController {
             return Result.fail(401,"删除失败",false,null);
         }
     }
-
+    @RequiresRoles("超级管理员")
     @PostMapping(value = "InsertUser")
     public Result InsertUser(@RequestBody EmployeeUser employeeUser){
         int i = employeeUserService.InsertUser(employeeUser);
