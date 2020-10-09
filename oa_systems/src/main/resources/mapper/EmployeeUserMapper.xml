@@ -2,15 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.EmployeeUserMapper">
 
-    
-<!--    <resultMap id="employeeRole" type="com.example.demo.entity.EmployeeUser">-->
-<!--        -->
-<!--        <collection property=""-->
-<!--    </resultMap>-->
-<!--    <select id="employeeRole" resultMap="employeeRole">-->
-<!--        select e.role_name from employee_user eu-->
-<!--        left  join employee_user_role eur on eu.employee_id=eur.employee_id-->
-<!--        left join role e on e.id=eur.role_id and eur.employee_id=1;-->
-<!--    </select>-->
 
+    <resultMap id="employeeUserMap" type="com.example.demo.entity.EmployeeUser">
+        <id column="employee_id" property="employeeId"></id>
+        <result column="employee_user" property="employeeUser"></result>
+        <collection property="employeeRole" javaType="java.util.Set" ofType="com.example.demo.entity.Role">
+            <id column="id" property="id"></id>
+            <result column="role_name" property="roleName"></result>
+            <result column="description" property="description"></result>
+        </collection>
+    </resultMap>
+    <select id="getemployeeRole" parameterType="int" resultType="com.example.demo.entity.Role">
+ select eu.employee_id euid,eu.employee_user,r.id,r.role_name from employee_user eu
+ left join employee_user_role eur on eu.employee_id=eur.id
+ left join role r on eur.id=r.id
+ where eu.employee_id=#{employee_id}
+    </select>
 </mapper>

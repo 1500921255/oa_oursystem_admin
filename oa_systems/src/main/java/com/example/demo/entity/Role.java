@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -31,6 +32,8 @@ public class Role implements Serializable {
      * 角色名称
      */
     private String roleName;
-
-
+    /**
+     * 角色信息
+     */
+    private String description;
 }

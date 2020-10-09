@@ -20,6 +20,6 @@ import java.util.Set;
 @Repository
 public interface EmployeeUserMapper extends BaseMapper<EmployeeUser> {
 
-    @Select("select * from  role where id in(select role_id from employee_user_role where employee_id = #{employee_id})")
-    Set<Role> employeeRole (int employeeID);
+//    @Select("select * from  role where id in(select role_id from employee_user_role where employee_id = #{employee_id})")
+    Set<Role> getemployeeRole (int employeeID);
 }

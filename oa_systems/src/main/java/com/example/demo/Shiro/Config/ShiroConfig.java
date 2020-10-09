@@ -3,6 +3,7 @@ package com.example.demo.Shiro.Config;
 
 import com.example.demo.Shiro.Realms.EmployeeRealm;
 import com.example.demo.Shiro.Session.SessionManager;
+//import com.example.demo.Shiro.SimpleCORSFilter;
 import com.example.demo.Shiro.SimpleCORSFilter;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -38,8 +39,8 @@ public class ShiroConfig {
         Map<String, String> filterMap = shiroFilterFactoryBean.getFilterChainDefinitionMap();
         filterMap.put("/employee-user/login","anon");
         //认证之后才可访问
-        filterMap.put("/depart-dict/departPage", "authc");
-
+        filterMap.put("/**", "authc");
+System.out.println("123");
         //未登录或无权限时跳转
         shiroFilterFactoryBean.setLoginUrl("/bus/error");
         shiroFilterFactoryBean.setUnauthorizedUrl("/bus/error");

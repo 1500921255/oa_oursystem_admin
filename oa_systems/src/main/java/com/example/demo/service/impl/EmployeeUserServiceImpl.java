@@ -70,8 +70,8 @@ public class EmployeeUserServiceImpl extends ServiceImpl<EmployeeUserMapper, Emp
     }
 
     @Override
-    public Set<Role> employeeRole(int employeeID) {
-        Set<Role> set = userMapper.employeeRole(employeeID);
+    public Set<Role> getemployeeRole(int employeeID) {
+        Set<Role> set = userMapper.getemployeeRole(employeeID);
         return set;
     }
 

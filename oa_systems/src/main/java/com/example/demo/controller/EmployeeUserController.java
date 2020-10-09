@@ -99,7 +99,7 @@ public class EmployeeUserController {
 
     @GetMapping(value = "UserRoles/{id}")
     public Result UserRoles(@PathVariable("id")int id){
-        Set<Role> set = employeeUserService.employeeRole(id);
+        Set<Role> set = employeeUserService.getemployeeRole(id);
         return Result.succ(set);
     }
 }
