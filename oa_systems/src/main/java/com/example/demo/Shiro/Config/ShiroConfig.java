@@ -3,22 +3,19 @@ package com.example.demo.Shiro.Config;
 
 import com.example.demo.Shiro.Realms.EmployeeRealm;
 import com.example.demo.Shiro.Session.SessionManager;
-//import com.example.demo.Shiro.SimpleCORSFilter;
-<<<<<<< HEAD
-import com.example.demo.Shiro.SimpleCORSFilter;
-=======
 import com.example.demo.common.SimpleCORSFilter;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
->>>>>>> 9a0816eeda56860d2291a2be09f9ead34bd2590d
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -45,12 +42,9 @@ public class ShiroConfig {
         filterMap.put("/employee-user/login","anon");
         //认证之后才可访问
         filterMap.put("/**", "authc");
-<<<<<<< HEAD
 System.out.println("123");
-=======
 //        filterMap.put("/employee-user/page", "authc");
 
->>>>>>> 9a0816eeda56860d2291a2be09f9ead34bd2590d
         //未登录或无权限时跳转
         shiroFilterFactoryBean.setLoginUrl("/bus/login/error");
         shiroFilterFactoryBean.setUnauthorizedUrl("/auth/error");
@@ -117,6 +111,4 @@ System.out.println("123");
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
-
-
 }

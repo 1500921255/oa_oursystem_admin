@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.EmployeeUserMapper">
 
 
-    <resultMap id="employeeUserMap" type="com.example.demo.entity.EmployeeUser">
+    <resultMap id="getemployeeRole" type="com.example.demo.entity.EmployeeUser">
         <id column="employee_id" property="employeeId"></id>
         <result column="employee_user" property="employeeUser"></result>
         <collection property="employeeRole" javaType="java.util.Set" ofType="com.example.demo.entity.Role">
@@ -12,10 +12,10 @@
             <result column="description" property="description"></result>
         </collection>
     </resultMap>
-    <select id="getemployeeRole" parameterType="int" resultType="com.example.demo.entity.Role">
+    <select id="getemployeeRole" parameterType="int" resultType="com.example.demo.entity.Role" resultSets="employeeRole">
  select eu.employee_id euid,eu.employee_user,r.id,r.role_name from employee_user eu
- left join employee_user_role eur on eu.employee_id=eur.id
- left join role r on eur.id=r.id
+ left join employee_user_role eur on eu.employee_id=eur.employee_id
+ left join role r on eur.role_id=r.id
  where eu.employee_id=#{employee_id}
     </select>
 </mapper>

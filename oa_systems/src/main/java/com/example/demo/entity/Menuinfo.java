@@ -1,7 +1,10 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,6 +25,7 @@ public class Menuinfo implements Serializable {
     /**
      * 菜单ID
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**

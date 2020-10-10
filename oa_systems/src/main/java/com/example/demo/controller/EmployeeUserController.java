@@ -10,6 +10,8 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
@@ -43,7 +45,8 @@ public class EmployeeUserController {
        try{
         subject.login(token);
         String SessionId = (String) subject.getSession().getId();
-           System.out.println( subject.hasRole("超级管理员"));
+           //System.out.println( subject.hasRole("超级管理员"));
+           System.out.println(subject.isPermitted("employee_user_add"));
         return Result.succ(SessionId);
        }catch (IncorrectCredentialsException e){
         return Result.fail("密码错误");
@@ -57,14 +60,12 @@ public class EmployeeUserController {
        return Result.fail("登陆失败");
     }
 
-    @RequiresRoles("超级管理员")
     @GetMapping(value = "/Page/{current}")
     public Result SelectAll(@PathVariable("current") int current){
         System.out.println("213123");
         Map map = employeeUserService.Pagelist(current,5);
         return Result.succ(map);
     }
-    @RequiresRoles("超级管理员")
     @DeleteMapping(value = "/DeleteUser/{employeeId}")
     public Result DeleteUser(@PathVariable("employeeId") int employeeId){
         int i = employeeUserService.DeleteUser(employeeId);
@@ -74,7 +75,7 @@ public class EmployeeUserController {
             return Result.fail(401,"删除失败",false,null);
         }
     }
-    @RequiresRoles("超级管理员")
+
     @PostMapping(value = "InsertUser")
     public Result InsertUser(@RequestBody EmployeeUser employeeUser){
         int i = employeeUserService.InsertUser(employeeUser);
@@ -84,7 +85,7 @@ public class EmployeeUserController {
             return Result.fail(401,"添加失败",false,null);
         }
     }
-
+    
     @PutMapping(value = "UpdateUser")
     public Result UpdateUser(@RequestBody EmployeeUser employeeUser){
         int i = employeeUserService.UpdateUser(employeeUser);

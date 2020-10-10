@@ -1,8 +1,10 @@
 package com.example.demo.Shiro.Realms;
 
 import com.example.demo.entity.EmployeeUser;
+import com.example.demo.entity.Permission;
 import com.example.demo.entity.Role;
 import com.example.demo.service.EmployeeUserService;
+import com.example.demo.service.RoleService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -24,6 +26,8 @@ public class EmployeeRealm extends AuthorizingRealm {
 
     @Autowired
     EmployeeUserService employeeUserService;
+    @Autowired
+    RoleService roleService;
 
     /**
      * 授权
@@ -32,19 +36,30 @@ public class EmployeeRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-       System.out.println("789");
         //得到认证之后返回的安全数据
         EmployeeUser employeeUser = (EmployeeUser) principalCollection.getPrimaryPrincipal();
         Set<Role> roles = employeeUserService.getemployeeRole(employeeUser.getEmployeeId());
+        Set<Permission>perms = new HashSet<>();
         System.out.println(roles);
         Set<String> userroles = new HashSet<>();
+        Set<String> userperms = new HashSet<>();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
         for (Role role : roles){
             userroles.add(role.getRoleName());
-            System.out.println("78910");
+            perms = roleService.getRolePermissions(role.getId());
         }
+        for(Permission permission : perms){
+            userperms.add(permission.getPermission());
+        }
+//        System.out.println(userperms);
         info.setRoles(userroles);
+        info.setStringPermissions(userperms);
+
+        System.out.println("-----角色------");
+        System.out.println(info.getRoles());
+        System.out.println("-----权限------");
+        System.out.println(info.getStringPermissions());
         System.out.println("授权完成");
         return info;
     }
