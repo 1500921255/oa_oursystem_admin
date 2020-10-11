@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.common.Result;
+import com.example.demo.common.UserResult;
 import com.example.demo.entity.EmployeeUser;
 import com.example.demo.entity.Role;
 import com.example.demo.service.EmployeeUserService;
@@ -10,6 +11,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -47,7 +51,7 @@ public class EmployeeUserController {
         String SessionId = (String) subject.getSession().getId();
            //System.out.println( subject.hasRole("超级管理员"));
            System.out.println(subject.isPermitted("employee_user_add"));
-        return Result.succ(SessionId);
+        return Result.succ(SessionId,subject.getSession().getAttribute("roles"), subject.getSession().getAttribute("perms"), subject.getSession().getAttribute("menus"));
        }catch (IncorrectCredentialsException e){
         return Result.fail("密码错误");
        }catch (LockedAccountException e){
@@ -66,6 +70,7 @@ public class EmployeeUserController {
         Map map = employeeUserService.Pagelist(current,5);
         return Result.succ(map);
     }
+    @RequiresRoles(value = "超级管理员")
     @DeleteMapping(value = "/DeleteUser/{employeeId}")
     public Result DeleteUser(@PathVariable("employeeId") int employeeId){
         int i = employeeUserService.DeleteUser(employeeId);
@@ -76,6 +81,7 @@ public class EmployeeUserController {
         }
     }
 
+    @RequiresRoles(value = "超级管理员")
     @PostMapping(value = "InsertUser")
     public Result InsertUser(@RequestBody EmployeeUser employeeUser){
         int i = employeeUserService.InsertUser(employeeUser);
@@ -85,7 +91,7 @@ public class EmployeeUserController {
             return Result.fail(401,"添加失败",false,null);
         }
     }
-    
+    @RequiresRoles(value = "超级管理员")
     @PutMapping(value = "UpdateUser")
     public Result UpdateUser(@RequestBody EmployeeUser employeeUser){
         int i = employeeUserService.UpdateUser(employeeUser);

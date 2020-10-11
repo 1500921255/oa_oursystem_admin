@@ -37,7 +37,7 @@ public class Menuinfo implements Serializable {
     /**
      * 菜单路由地址
      */
-    private String roter;
+    private String router;
 
 
 }

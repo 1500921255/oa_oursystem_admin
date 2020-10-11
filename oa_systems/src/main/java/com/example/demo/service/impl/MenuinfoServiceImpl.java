@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -46,5 +47,10 @@ public class MenuinfoServiceImpl extends ServiceImpl<MenuinfoMapper, Menuinfo> i
     public int UpdateMenu(Menuinfo menuinfo) {
         int i = menuinfoMapper.updateById(menuinfo);
         return i;
+    }
+
+    public Menuinfo MensByRouter(String router){
+       Menuinfo menuinfo = menuinfoMapper.selectOne(new QueryWrapper<Menuinfo>().eq("router",router));
+       return menuinfo;
     }
 }

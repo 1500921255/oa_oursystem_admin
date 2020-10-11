@@ -3,6 +3,10 @@ package com.example.demo.common;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -20,6 +24,16 @@ public class Result implements Serializable {
     private String msg;
     private Boolean flag;
     private Object data;
+
+    /**
+     * 用于返回用户安全数据
+     * @param data
+     * @return
+     */
+    protected String SessionID;
+    protected Object roles;
+    protected Object perms;
+    protected Object menus;
 
     public static Result succ(Object data) {
         return succ(200, "操作成功",true, data);
@@ -51,4 +65,18 @@ public class Result implements Serializable {
         return r;
     }
 
+
+    public static Result succ(String SessionID,Object roles,Object perms,Object menus){
+        Result u = new Result();
+        u.setCode(200);
+        u.setFlag(true);
+        u.setMsg("操作成功");
+        Map map = new HashMap();
+        map.put("SessionID",SessionID);
+        map.put("roles",roles);
+        map.put("perms",perms);
+        map.put("menus",menus);
+        u.setData(map);
+        return u;
+    }
 }

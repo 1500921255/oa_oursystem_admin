@@ -18,5 +18,6 @@ public interface MenuinfoService extends IService<Menuinfo> {
     int DeleteMenu(int id);
     int InsertMenu(Menuinfo menuinfo);
     int UpdateMenu(Menuinfo menuinfo);
+    Menuinfo MensByRouter(String router);
 
 }
