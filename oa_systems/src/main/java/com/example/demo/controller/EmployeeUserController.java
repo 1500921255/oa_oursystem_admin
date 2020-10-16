@@ -48,10 +48,12 @@ public class EmployeeUserController {
        UsernamePasswordToken token = new UsernamePasswordToken(employee_user,employee_pwd);
        try{
         subject.login(token);
+        EmployeeUser employeeUser = (EmployeeUser) subject.getPrincipal();
+        int id = employeeUser.getEmployeeId();
         String SessionId = (String) subject.getSession().getId();
            //System.out.println( subject.hasRole("超级管理员"));
            System.out.println(subject.isPermitted("employee_user_add"));
-        return Result.succ(SessionId,subject.getSession().getAttribute("roles"), subject.getSession().getAttribute("perms"), subject.getSession().getAttribute("menus"));
+        return Result.succ(SessionId,subject.getSession().getAttribute("roles"), subject.getSession().getAttribute("perms"), subject.getSession().getAttribute("menus"),id);
        }catch (IncorrectCredentialsException e){
         return Result.fail("密码错误");
        }catch (LockedAccountException e){
@@ -62,6 +64,13 @@ public class EmployeeUserController {
            e.printStackTrace();
        }
        return Result.fail("登陆失败");
+    }
+
+    @PostMapping(value = "loginout")
+    public Result loginout(){
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+    return Result.succ(null);
     }
 
     @GetMapping(value = "/Page/{current}")

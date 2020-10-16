@@ -48,8 +48,8 @@ public class Result implements Serializable {
         return r;
     }
 
-    public static Result fail(String msg) {
-        return fail(400, msg,false, null);
+    public static Result fail(Object data) {
+        return fail(400,"操作失败",false, data);
     }
 
     public static Result fail(String msg, Object data) {
@@ -66,7 +66,7 @@ public class Result implements Serializable {
     }
 
 
-    public static Result succ(String SessionID,Object roles,Object perms,Object menus){
+    public static Result succ(String SessionID,Object roles,Object perms,Object menus,int id){
         Result u = new Result();
         u.setCode(200);
         u.setFlag(true);
@@ -76,6 +76,7 @@ public class Result implements Serializable {
         map.put("roles",roles);
         map.put("perms",perms);
         map.put("menus",menus);
+        map.put("UserId",id);
         u.setData(map);
         return u;
     }
