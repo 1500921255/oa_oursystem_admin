@@ -3,13 +3,8 @@ package com.example.demo.Shiro.Config;
 
 import com.example.demo.Shiro.Realms.EmployeeRealm;
 import com.example.demo.Shiro.Session.SessionManager;
-//import com.example.demo.Shiro.SimpleCORSFilter;
-<<<<<<< HEAD
-import com.example.demo.Shiro.SimpleCORSFilter;
-=======
 import com.example.demo.common.SimpleCORSFilter;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
->>>>>>> 9a0816eeda56860d2291a2be09f9ead34bd2590d
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -44,13 +39,8 @@ public class ShiroConfig {
         Map<String, String> filterMap = shiroFilterFactoryBean.getFilterChainDefinitionMap();
         filterMap.put("/employee-user/login","anon");
         //认证之后才可访问
-        filterMap.put("/**", "authc");
-<<<<<<< HEAD
-System.out.println("123");
-=======
+//        filterMap.put("/**", "authc");
 //        filterMap.put("/employee-user/page", "authc");
-
->>>>>>> 9a0816eeda56860d2291a2be09f9ead34bd2590d
         //未登录或无权限时跳转
         shiroFilterFactoryBean.setLoginUrl("/bus/login/error");
         shiroFilterFactoryBean.setUnauthorizedUrl("/auth/error");

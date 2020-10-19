@@ -36,7 +36,6 @@ public class DepartDictController {
     }
     @GetMapping("departPage")
     public Result selectPage(@RequestParam("currentPage") int currentPage,@RequestParam("pagesize") int pagesize) {
-       System.out.println("213123");
         Map map = departDictService.SelectPage(currentPage,pagesize);
         if (map == null) {
             return Result.succ(401, "暂无数据",false, null);
@@ -76,10 +75,8 @@ public class DepartDictController {
     public Result UpdateOneEmployees(@RequestBody DepartDict departDict){
         departDictService.UpdateOne(departDict);
         if (departDict!=null) {
-            System.out.println("1");
             return Result.succ(200, "修改成功",true, departDict);
         } else {
-            System.out.println("2");
             return Result.succ(401, "修改失败",false,departDict);
         }
     }

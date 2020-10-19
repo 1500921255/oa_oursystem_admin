@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.List;
 /**
  * <p>
  *  Mapper 接口
@@ -22,4 +22,5 @@ public interface EmployeeUserMapper extends BaseMapper<EmployeeUser> {
 
 //    @Select("select * from  role where id in(select role_id from employee_user_role where employee_id = #{employee_id})")
     Set<Role> getemployeeRole (int employeeID);
+    int[] getemployeeId();
 }

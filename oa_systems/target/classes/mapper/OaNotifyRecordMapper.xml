@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OaNotifyRecordMapper">
+
+    <resultMap id="oaNotifyRecord" type="com.example.demo.entity.OaNotifyRecord">
+        <id column="id" property="id"></id>
+        <result column="oa_notify_id" property="oaNotifyId"></result>
+        <result column="employee_id" property="employeeId"></result>
+        <result column="read_flag" property="readFlag"></result>
+        <result column="read_date" property="readDate"></result>
+        <collection property="OaNotice" ofType="com.example.demo.entity.OaNotice">
+            <result column="notice_Title" property="noticeTitle"></result>
+            <result column="notice_Details" property="noticeDetails"></result>
+        </collection>
+        <collection property="EmployeeUser" ofType="com.example.demo.entity.EmployeeUser">
+            <id column="employee_id" property="employeeId"></id>
+            <result column="employee_name" property="employeeName"></result>
+        </collection>
+    </resultMap>
+    <insert id="insertList" parameterType="java.util.List">
+        insert into oa_notify_record
+        (oa_notify_id,employee_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.oaNotifyId},
+            #{item.employeeId}
+            )
+        </foreach>
+    </insert>
+    <select id="getNotify_employeeId" resultType="int">
+         select distinct employee_id from oa_notify_record where read_flag=0
+    </select>
+    <select id="getNotify_record" parameterType="int" resultMap="oaNotifyRecord">
+         select o.notice_Title,o.notice_Details
+         from
+         oa_notify_record onr inner join oa_notice o on onr.oa_notify_id=o.id
+         inner join employee_user eu on eu.employee_id=onr.employee_id
+where onr.read_flag=0 and onr.employee_id=#{employeeId};
+    </select>
+</mapper>

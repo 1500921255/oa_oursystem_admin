@@ -26,4 +26,5 @@ public interface EmployeeUserService extends IService<EmployeeUser> {
     int InsertUser(EmployeeUser employeeUser);
 //    @Select("select * from  role where id in(select role_id from employee_user_role where employee_id = #{employee_id})")
     Set<Role> getemployeeRole (int employeeID);
+    int[] getemployeeId();
 }

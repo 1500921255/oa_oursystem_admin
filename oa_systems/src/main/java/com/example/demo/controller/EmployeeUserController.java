@@ -60,7 +60,6 @@ public class EmployeeUserController {
     @RequiresRoles("超级管理员")
     @GetMapping(value = "/Page/{current}")
     public Result SelectAll(@PathVariable("current") int current){
-        System.out.println("213123");
         Map map = employeeUserService.Pagelist(current,5);
         return Result.succ(map);
     }
