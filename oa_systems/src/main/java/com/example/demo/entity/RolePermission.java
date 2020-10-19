@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -13,12 +14,14 @@ import lombok.EqualsAndHashCode;
  *
  * @author ymy
  * @since 2020-10-09
+ * @since 2020-10-15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class RolePermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
 
     /**
      * 编号

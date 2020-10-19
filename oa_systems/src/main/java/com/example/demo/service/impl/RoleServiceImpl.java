@@ -34,7 +34,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     public int delete(int id){
         int i = roleMapper.deleteById(id);
-        return id;
+        return i;
     }
 
     public int insert(Role role){
